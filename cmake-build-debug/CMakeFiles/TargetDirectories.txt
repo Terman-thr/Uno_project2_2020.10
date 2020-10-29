@@ -1,0 +1,3 @@
+E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/CMakeFiles/p2.dir
+E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

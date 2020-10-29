@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+E:/Codefield/CODE_C/CLionProjects/p2/UI.h
+
+E:/Codefield/CODE_C/CLionProjects/p2/main.c
+stdio.h
+-
+string.h
+-
+UI.h
+E:/Codefield/CODE_C/CLionProjects/p2/UI.h
+
