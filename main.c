@@ -67,12 +67,11 @@ void Card2Str(char *str,int num) {
 //Add cards to players: pointer of first card of stack; pointer of specific player
 void Dealer(const int *card, Player *player){
     int i=0,j=0;
-    while (*(card+i)!=-1) /* -1 represent for no card, draw card start from 0*/
-    {
-        while ((*player).card[j]==-1){
-            (*player).card[j]=*(card+i);
-            j++;}
-        i++;}
+    while (*(card+i)==-1) /* -1 represent for no card, draw card start from 0*/
+    {   i++;}
+    while ((*player).card[j]!=-1)
+    {   j++;}
+    (*(player+j)).card[j]=*(card+i);
 }
 
 int FirstCardCmp(Player *player,int n){
