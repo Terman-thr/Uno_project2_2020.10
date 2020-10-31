@@ -53,7 +53,7 @@ void ShuffleCard(int CardNum,int *card){
 void Card2Str(int num) {
     char *rank[4]={"J","Q","K","A"};
     char *suit[4]={"  Spades","  Hearts","Diamonds","   Clubs"};
-    if ((num % 13 + 1) > 10)
+    if ((num % 13 + 1) >= 10)
         printf("%s %s   ", suit[num / 13], rank[num % 13 - 9]);
     else
         printf("%s %d   ", suit[num / 13], num % 13 + 2);
@@ -115,6 +115,8 @@ void PlayACard(Player *player,int num,int *Card_record,int *Card_valid_Rec,int *
 /*test whether the card can be played
  * Card_valid_Rec; the card player want to play*/
 int TestCard(const int *Card_valid_Rec,const int *card){
+    if (*card<0)
+        return 0;
     if (*Card_valid_Rec/13==*card/13 || *Card_valid_Rec%13==*card%13)
         return 1;
     else
@@ -247,7 +249,7 @@ int main(int argc,char*argv[]) {
     //-------------------------------------the play part (demo mode)----------------------------------------------------
 
     //deal the first card of stack ;initialize the suit and rank
-    int k=0;
+    int k=0,t=0;
     while (card[k]==-1){
         k++;}
     Card_Record=card[k];
@@ -257,46 +259,136 @@ int main(int argc,char*argv[]) {
 
     //the play cards part
     k=first; //the first one to play the card.
-    int SerialNum,k_1=k;//test the Q(jump card)
+    int SerialNum,k_1=k;
+    /* SerialNum: the number of cards in player's hand
+    * k: test the Q(jump card)*/
     srand((unsigned)time(NULL));
     while (r>0){
         int attack=0,direction=1;// 1 for clockwise 0 for counter-clockwise
-
-        while ((player1+k)->card[0]!=-1)/* one player used all his/her cards */
+        while ((player1+k)->card[0]!=-1) /* one player used all his/her cards */
         {
             k_1=k;//adjust the k
+            /* ------------------------------if there is no attack--------------------------- */
             if (attack==0){
-                SerialNum=rand()%20;
+                for (SerialNum=0;SerialNum<MAX_CARD+1;SerialNum++) {
+                    //ensure the card serial number is valid
+                    if (SerialNum==MAX_CARD)/* the player have to draw a card */{
+                        Dealer(card,player1+k);
+                        printf("\nPlayer %d draws: ",k_1+1); //demo mode
 
-                //ensure the card serial number is valid
+                        while ((player1 + k_1)->card[t]!=-1)
+                        {   t++;}
+                        Card2Str((player1+k_1)->card[t-1]);
+                        t=0;
 
-                while ((player1+k)->card[SerialNum]==-1 /* the card position is empty */
-                || !TestCard(&Card_valid_Rec,card+SerialNum) ) /* not fit rank or suit */
-                {   SerialNum=rand()%20;}
-
-                switch ((player1+k)->card[SerialNum]%13) /* test whether they are special cards */{
-                    case 9: //J
-                        k=direction ? (k+1):(k-1);
-                        break;
-                    case 10: //Q
-                        direction=!direction;
-                        break;
-                    case 0: //2
-                        attack=2;
-                        break;
-                    case 1: //3
-                        attack=3;
-                        break;
+                        printf("\nPlayer %d's card(s): ",k_1+1);//show
+                        while ((player1 + k_1)->card[t]!=-1){
+                            Card2Str((player1 + k_1)->card[t]);
+                            printf("  ");
+                            t++;
+                        }
+                        t=0;//reset the t;
+                        getchar();
+                        break;}
+                    if ((player1 + k)->card[SerialNum] != -1 /* the card position is empty */
+                        && TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum])) /* not fit rank or suit */
+                        {
+                        printf("\nPlayer %d plays: ",k_1+1); //demo mode
+                        Card2Str((player1 + k)->card[SerialNum]);
+                        switch ((player1+k)->card[SerialNum]%13) /* test whether they are special cards */{
+                            case 9: //J
+                                k=direction ? (k+1):(k-1);
+                                break;
+                            case 10: //Q
+                                direction=!direction;
+                                break;
+                            case 0: //2
+                                attack=2;
+                                break;
+                            case 1: //3
+                                attack=3;
+                                break;
+                        }
+                        PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                        //show the cards
+                        printf("\nPlayer %d's card(s): ",k_1+1);//demo mode
+                        while ((player1 + k_1)->card[t]!=-1)/* show */{
+                            Card2Str((player1 + k_1)->card[t]);
+                            printf("  ");
+                            t++;}
+                        t=0;//reset the t
+                        getchar();
+                        break; }
                 }
-                PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                 k=direction ? (k+1):(k-1);
+
+                //test whether k exceed the range
                 if (k>=n){
                     k=k-n;}
                 else if (k<=-1){
                     k=k+n;}
+            }
+                /* ------------------------there is an attack --------------------------*/
+            else{
+                for (SerialNum=0;SerialNum<MAX_CARD+1;SerialNum++) {
+                    //ensure the card serial number is valid
+                    if (SerialNum==MAX_CARD)/* player have no card to play i.e. draw many cards */{
+                        for (int i=0;i<attack;i++)/* draw card*/{
+                            Dealer(card, player1 + k);
+                        }
+                        printf("Player %d draws :",k_1+1);
+                        while ((player1 + k_1)->card[t]!=-1){
+                            Card2Str((player1+k_1)->card[t-1]);
+                            printf("  ");
+                            t++;
+                        }t=0;
+                        printf("\nPlayer %d's card(s): ",k_1+1);//show
+                        while ((player1 + k_1)->card[t]!=-1){
+                            Card2Str((player1 + k_1)->card[t]);
+                            printf("  ");
+                            t++;
+                        }t=0;
+                        break;}
 
-            }/* if there is no attack */
+                    if (TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum])/* not fit rank or suit */
+                        && ((player1 + k)->card[SerialNum]==7
+                        || (player1 + k)->card[SerialNum]==2
+                        || (player1 + k)->card[SerialNum]==3
+                        || (player1 + k)->card[SerialNum]==9
+                        ||(player1 + k)->card[SerialNum]==10))
+                    { switch ((player1+k)->card[SerialNum]%13) {
+                            case 5: //7
+                                attack=0;
+                                PlayACard(player1+k,SerialNum,&Card_Record,&Card_valid_Rec,DiscardPile);
+                                break;
+                            case 0: //2
+                                attack+=2;
+                                PlayACard(player1+k,SerialNum,&Card_Record,&Card_valid_Rec,DiscardPile);
+                                break;
+                            case 1: //3
+                                attack+=3;
+                                PlayACard(player1+k,SerialNum,&Card_Record,&Card_valid_Rec,DiscardPile);
+                                break;
+                            case 9: //J
+                                k=direction ? (k+1):(k-1);
+                                PlayACard(player1+k,SerialNum,&Card_Record,&Card_valid_Rec,DiscardPile);
+                                break;
+                            case 10: //Q
+                                direction=!direction;
+                                PlayACard(player1+k_1,SerialNum,&Card_Record,&Card_valid_Rec,DiscardPile);
+                                break;
+                        }
+                        break; }
+                }
+                k=direction ? (k+1):(k-1);
+                //test whether k exceed the range
+                if (k>=n){
+                    k=k-n;}
+                else if (k<=-1){
+                    k=k+n;}
+            }
         }
+        r--;
     }
 
     free(card);
