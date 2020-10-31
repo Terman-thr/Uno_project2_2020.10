@@ -62,7 +62,7 @@ void Card2Str(int num) {
 
 //Add cards to players: pointer of first card of stack; pointer of specific player
 void Dealer(int *card, Player *player){
-    int i=0,j=0,k=0;
+    int i=0,j=0;
     while (*(card+i)==-1) /* -1 represent for no card, draw card start from 0*/
     {   i++;}
     while ((*player).card[j]!=-1)
@@ -84,27 +84,41 @@ int FirstCardCmp(Player *player,int n){
     return num;//if several player have same card, choose the previous player
 }
 
-/*Play a card .i.e add a card to Card_record
+/*Play a card .i.e add a card to Card_record and DiscardPile;tidy player's card
  * the pointer of player; the sequence number of the card (0-MAX_CARD-1)*/
 void PlayACard(Player *player,int num,int *Card_record,int *Card_valid_Rec,int *DiscardPile){
     int k=0;
-    if (*Card_valid_Rec==-1){
+    if (*Card_valid_Rec==-1)/* the first round */{
         while(*(DiscardPile+k)!=-1)
         {   k++;}
         *(DiscardPile+k)=player->card[0];
         player->card[0]=-1;
     }
     else{
-        *Card_record=player->card[num];
-        *Card_valid_Rec=player->card[num];
+        if (num>-1) /* player doesn't choose to draw a card */{
+            *Card_record = player->card[num];
+            *Card_valid_Rec = player->card[num];
+        }
+        else{
+            *Card_record=-1;}
+
         for (int i=num;i<MAX_CARD-1;i++){
             player->card[i]=player->card[i+1];
             player->card[MAX_CARD-1]=-1;
         }/*tidy the card*/
         while(*(DiscardPile+k)!=-1)
         {   k++;}
-        *(DiscardPile+k)=*Card_valid_Rec;
+        *(DiscardPile+k)=*Card_valid_Rec; /* add card to discard pile */
     }
+}
+
+/*test whether the card can be played
+ * Card_valid_Rec; the card player want to play*/
+int TestCard(const int *Card_valid_Rec,const int *card){
+    if (*Card_valid_Rec/13==*card/13 || *Card_valid_Rec%13==*card%13)
+        return 1;
+    else
+        return 0;
 }
 
 //Add card from stack or initial stack to players
@@ -240,10 +254,50 @@ int main(int argc,char*argv[]) {
     Card_valid_Rec=card[k];
     printf("\n\n==========================Game Start============================\n\nFirst card : ");
     Card2Str(Card_valid_Rec);
-    //the play cards part
-    /* while (r>0){
 
-    }*/
+    //the play cards part
+    k=first; //the first one to play the card.
+    int SerialNum,k_1=k;//test the Q(jump card)
+    srand((unsigned)time(NULL));
+    while (r>0){
+        int attack=0,direction=1;// 1 for clockwise 0 for counter-clockwise
+
+        while ((player1+k)->card[0]!=-1)/* one player used all his/her cards */
+        {
+            k_1=k;//adjust the k
+            if (attack==0){
+                SerialNum=rand()%20;
+
+                //ensure the card serial number is valid
+
+                while ((player1+k)->card[SerialNum]==-1 /* the card position is empty */
+                || !TestCard(&Card_valid_Rec,card+SerialNum) ) /* not fit rank or suit */
+                {   SerialNum=rand()%20;}
+
+                switch ((player1+k)->card[SerialNum]%13) /* test whether they are special cards */{
+                    case 9: //J
+                        k=direction ? (k+1):(k-1);
+                        break;
+                    case 10: //Q
+                        direction=!direction;
+                        break;
+                    case 0: //2
+                        attack=2;
+                        break;
+                    case 1: //3
+                        attack=3;
+                        break;
+                }
+                PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                k=direction ? (k+1):(k-1);
+                if (k>=n){
+                    k=k-n;}
+                else if (k<=-1){
+                    k=k+n;}
+
+            }/* if there is no attack */
+        }
+    }
 
     free(card);
     free(DiscardPile);
