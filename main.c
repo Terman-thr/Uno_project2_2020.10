@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <time.h>
-#include <windows.h>
 #define MAX_CARD 20 // one player can have no more than 20 cards
 #define MAX_WIDE_NUM 8
 //structure of players
@@ -40,7 +39,7 @@ int str2num(const char *num){
 // total card number ; the first card address
 void ShuffleCard(int CardNum,int *card){
     int tmp;
-    srand((unsigned)time(NULL));
+    srand(time(NULL));
     for (int i=0;i<CardNum;i++){
         int ran=rand()%(CardNum);
         tmp=*(card+i);
@@ -59,7 +58,7 @@ int CalCardNum(const int *card){
 
 //test number of card(specific)
 int TestCardEmpty(const int *card,int d){
-    if (card[53*d-1]==-1)
+    if (card[52*d-1]==-1)
         return 1;//is empty
     else
         return 0;
@@ -69,6 +68,7 @@ int TestCardEmpty(const int *card,int d){
 void ShuffleDiscardPile(int *discardpile, int *card, int d){
     int num = CalCardNum(discardpile);
     if (TestCardEmpty(card,d)){
+        printf("\n\n We need to shuffle the discarded poker pile ...");
         ShuffleCard(num, discardpile);
         printf("\nShuffling cards ...\n");
         for (int i=0;i<num;i++)/* reuse the card */{
@@ -353,13 +353,6 @@ int main(int argc,char*argv[]) {
         while ((player1+k_1)->card[0]!=-1) /* one player used all his/her cards */
         {
             k_1=k;//adjust the k
-
-
-            //printf("\nbeggining: k=%d,k_1=%d,direction=%d\n",k,k_1,direction);
-
-
-
-
             /* ------------------------------if there is no attack--------------------------- */
             if (attack==0){
                 for (SerialNum=0;SerialNum<MAX_CARD+1;SerialNum++) {
@@ -421,22 +414,6 @@ int main(int argc,char*argv[]) {
             else{
                 Hand_poker_num=HandCardNum(player1+k_1);
                 for (SerialNum=0;SerialNum<MAX_CARD+1;SerialNum++) {
-
-
-                if ((player1 + k)->card[SerialNum]!=-1){
-                    printf("\n\n Previous card:");
-                    Card2Str(Card_valid_Rec);
-                    printf("\n\nCurrent card:");
-                    Card2Str((player1 + k)->card[SerialNum]);
-                    printf("\n Test Result: %d \n\n",TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum])
-                                                   && ((player1 + k)->card[SerialNum]%13==5
-                                                       || (player1 + k)->card[SerialNum]%13==0
-                                                       || (player1 + k)->card[SerialNum]%13==1
-                                                       || (player1 + k)->card[SerialNum]%13==9
-                                                       ||(player1 + k)->card[SerialNum]%13==10));
-                }
-
-
                     //ensure the card serial number is valid
                     if (SerialNum==MAX_CARD)/* player have no card to play i.e. draw many cards */{
                         for (int i=0;i<attack;i++)/* draw card*/{
@@ -448,12 +425,6 @@ int main(int argc,char*argv[]) {
                             Card2Str((player1 + k_1)->card[Hand_poker_num+t]);
                             printf("   ");
                         }t=0;
-
-
-
-                        //printf("\nwhen drawing cards: k=%d,k_1=%d,direction=%d\n",k,k_1,direction);
-
-
 
                         attack=0;
                         printf("\nPlayer %d's card(s): ",k_1+1);//show
@@ -511,9 +482,10 @@ int main(int argc,char*argv[]) {
                 k=KExceed(k,n);
             }
         }
+
         printf("\n\nPlayer %d wins this round!!!\n\n",k_1+1);
 
-        for (int i=1;i<=d;i++)/* collect all cards */{
+        for (int i=1;i<=d;i++){
             for (int j=0;j<=51;j++)
                 *(card+(i-1)*52+j)=j;
         }/* the card is now the pointer of the first 0 0-51->0-51*/
@@ -538,7 +510,7 @@ int main(int argc,char*argv[]) {
     }
 
     Winner_num=Winner(n,player1,winner);
-    printf("The finial winner is :\n");
+    printf("\n\nThe finial winner is :\n");
     for (int i=0;i<Winner_num;i++){
         printf("%2d. Player %d",i+1,*(winner+i)+1);
     }
