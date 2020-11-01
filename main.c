@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <time.h>
+#include <windows.h>
+
 #define MAX_CARD 20 // one player can have no more than 20 cards
 #define MAX_WIDE_NUM 8
 //structure of players
@@ -212,8 +214,8 @@ int main(int argc,char*argv[]) {
     welcome();
     int opt;
     char *filename="onecard.log";
-    int n=4,c=5,d=2,r=1;/*default numbers*/
-    int a_bool =0;/*1 for demo, 0 for players*/   //temporarily set a_bool be 0;
+    int n=4,c=5,d=1,r=10;/*default numbers*/
+    int a_bool =1;/*1 for demo, 0 for players*/   //temporarily set a_bool be 0;
     int option_index = 0;
     char string[11]="n:r:d:c:ha";
     static struct option long_options[] =
@@ -342,12 +344,11 @@ int main(int argc,char*argv[]) {
     Card_Record=card[k];
     Card_valid_Rec=card[k];
     printf("\n\n==========================Game Start============================\n\nFirst card : ");
-    printf("\n\n==========================Round 1============================\n\n");
     Card2Str(Card_valid_Rec);
 
     //the play cards part
     k=first; //the first one to play the card.
-    int Hand_poker_num=0;
+    int Hand_poker_num;
     int SerialNum,k_1=k;
     /* SerialNum: the number of cards in player's hand
     * k: test the Q(jump card)*/
@@ -356,13 +357,13 @@ int main(int argc,char*argv[]) {
 
     // ==================================the main part of playing cards==============================================
     while (r>0){
-        printf("\n\n==========================Round %d============================\n\n",r_1+1);
+        printf("\n\n==========================Round %d============================\n\n",r_1);
+        printf("Game starts with Player %d\n",k_1+1);
         printf("Dealing cards...\n");
 
         int attack=0,direction=1;// 1 for clockwise 0 for counter-clockwise
         while ((player1+k_1)->card[0]!=-1) /* one player used all his/her cards */
         {
-            printf("\nround=%d\n",r);
             k_1=k;//adjust the k
             /* ------------------------------if there is no attack--------------------------- */
             if (attack==0){
@@ -385,7 +386,6 @@ int main(int argc,char*argv[]) {
                             t++;
                         }
                         t=0;//reset the t;
-                        //getchar();
                         break;}
                     if (TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum])) /* fit rank or suit */
                         {
@@ -413,7 +413,6 @@ int main(int argc,char*argv[]) {
                             printf("  ");
                             t++;}
                         t=0;//reset the t
-                        //getchar();
                         break; }
                 }
                 k=direction ? (k+1):(k-1);
@@ -444,7 +443,6 @@ int main(int argc,char*argv[]) {
                             printf("  ");
                             t++;
                         }t=0;
-                        //getchar();
                         break;}
 
                     /* if he has special cards */
@@ -504,14 +502,27 @@ int main(int argc,char*argv[]) {
         printf("Preparing for another round...\n");
         printf("\n\nShuffling cards,please wait...\n\n\n");
 
-        printf("Round %d:\n",r_1);
+
+
+        if (a_bool) {
+            printf("\nInitial cards stack:\n");
+            for (int j = 0; j < 52 * d; j++) {
+                if (j%MAX_WIDE_NUM==0)
+                    printf("\n");
+                Card2Str(*(card + j));
+            }
+        }
+
+
+
+
+        printf("\nRound %d:\n\n",r_1);
         for (int i=0;i<n;i++)/* calculate players score */{
             (player1+i)->score=(player1+i)->score-HandCardNum(player1+i);
             printf("Player %d's score :%d \n ",i+1,(player1+i)->score);
         }
         //clean players' hand poker and re-deal cards
         for (int i=0;i<n;i++)/* clean hands */{
-            player[i].score=0;
             for (int j=0;j<MAX_CARD;j++)
                 player[i].card[j]=-1;// -1>>no card
         }
@@ -520,7 +531,6 @@ int main(int argc,char*argv[]) {
                 Dealer(card,(player1+i));}
         }
         k=k_1;
-        getchar();
         r--;
         r_1++;
     }
