@@ -37,11 +37,12 @@ int str2num(const char *num){
 }
 
 // total card number ; the first card address
-void ShuffleCard(int CardNum,int *card){
+void ShuffleCard(int CardNum,int *card,int a){
     int tmp;
     srand(time(NULL));
+    int ran;
     for (int i=0;i<CardNum;i++){
-        int ran=rand()%(CardNum);
+        ran=(rand()*a)%(CardNum);
         tmp=*(card+i);
         *(card+i)=*(card+(ran));
         *(card+(ran))=tmp;
@@ -69,7 +70,7 @@ void ShuffleDiscardPile(int *discardpile, int *card, int d){
     int num = CalCardNum(discardpile);
     if (TestCardEmpty(card,d)){
         printf("\n\n We need to shuffle the discarded poker pile ...");
-        ShuffleCard(num, discardpile);
+        ShuffleCard(num, discardpile,rand());
         printf("\nShuffling cards ...\n");
         for (int i=0;i<num;i++)/* reuse the card */{
             *(card+(52*d-num)+i)=*(discardpile + i);
@@ -276,7 +277,7 @@ int main(int argc,char*argv[]) {
     }/* the card is now the pointer of the first 0 0-51->0-51*/
 
     //Shuffle the cards
-    ShuffleCard(52 * d, card);
+    ShuffleCard(52 * d, card,rand());
     printf("\n\nShuffling cards,please wait...\n\n\n");
 
     //show the Shuffled cards in  **demo**  mode
@@ -300,6 +301,7 @@ int main(int argc,char*argv[]) {
         Dealer(card,player1+i);
     int first=FirstCardCmp(player1,n);/* first : the first player showing cards*/
     printf("\nDetermining the playing order...\n\n");
+
     /* Show first cards in all mode*/
     for (int i=0;i<n;i++){
         printf("Player %d : ",i+1);
@@ -321,6 +323,8 @@ int main(int argc,char*argv[]) {
         for (int j=0;j<c;j++){
             Dealer(card,(player1+i));}
     }
+
+    /* show what players have in **demo** mode */
     if (a_bool){
         for (int i=0;i<n;i++){
             printf("\n Player %d:",i+1);
@@ -338,6 +342,7 @@ int main(int argc,char*argv[]) {
     Card_Record=card[k];
     Card_valid_Rec=card[k];
     printf("\n\n==========================Game Start============================\n\nFirst card : ");
+    printf("\n\n==========================Round 1============================\n\n");
     Card2Str(Card_valid_Rec);
 
     //the play cards part
@@ -348,10 +353,16 @@ int main(int argc,char*argv[]) {
     * k: test the Q(jump card)*/
     srand((unsigned)time(NULL));
     int r_1=1;
+
+    // ==================================the main part of playing cards==============================================
     while (r>0){
+        printf("\n\n==========================Round %d============================\n\n",r_1+1);
+        printf("Dealing cards...\n");
+
         int attack=0,direction=1;// 1 for clockwise 0 for counter-clockwise
         while ((player1+k_1)->card[0]!=-1) /* one player used all his/her cards */
         {
+            printf("\nround=%d\n",r);
             k_1=k;//adjust the k
             /* ------------------------------if there is no attack--------------------------- */
             if (attack==0){
@@ -482,24 +493,34 @@ int main(int argc,char*argv[]) {
                 k=KExceed(k,n);
             }
         }
-
+        //---------------------------------One round finished----------------------------
         printf("\n\nPlayer %d wins this round!!!\n\n",k_1+1);
 
         for (int i=1;i<=d;i++){
             for (int j=0;j<=51;j++)
                 *(card+(i-1)*52+j)=j;
         }/* the card is now the pointer of the first 0 0-51->0-51*/
-        ShuffleCard(52 * d, card);
+        ShuffleCard(52 * d, card,(rand()));
         printf("Preparing for another round...\n");
-        printf("\nShuffling cards,please wait...\n\n\n");
+        printf("\n\nShuffling cards,please wait...\n\n\n");
 
         printf("Round %d:\n",r_1);
         for (int i=0;i<n;i++)/* calculate players score */{
-            (player1+i)->score-=HandCardNum(player1+i);
+            (player1+i)->score=(player1+i)->score-HandCardNum(player1+i);
             printf("Player %d's score :%d \n ",i+1,(player1+i)->score);
         }
+        //clean players' hand poker and re-deal cards
+        for (int i=0;i<n;i++)/* clean hands */{
+            player[i].score=0;
+            for (int j=0;j<MAX_CARD;j++)
+                player[i].card[j]=-1;// -1>>no card
+        }
+        for (int i=0;i<n;i++)/* deal cards */{
+            for (int j=0;j<c;j++){
+                Dealer(card,(player1+i));}
+        }
         k=k_1;
-        //getchar();
+        getchar();
         r--;
         r_1++;
     }
