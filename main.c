@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <time.h>
-#include <windows.h>
 
 #define MAX_CARD 20 // one player can have no more than 20 cards
 #define MAX_WIDE_NUM 8
@@ -39,7 +38,7 @@ int str2num(const char *num){
 }
 
 // total card number ; the first card address
-void ShuffleCard(int CardNum,int *card,int a){
+void ShuffleCard(int CardNum,int *card, int a){
     int tmp;
     srand(time(NULL));
     int ran;
@@ -214,8 +213,8 @@ int main(int argc,char*argv[]) {
     welcome();
     int opt;
     char *filename="onecard.log";
-    int n=4,c=5,d=1,r=10;/*default numbers*/
-    int a_bool =1;/*1 for demo, 0 for players*/   //temporarily set a_bool be 0;
+    int n=4,c=5,d=2,r=1;/*default numbers*/
+    int a_bool =0;/*1 for demo, 0 for players*/   //temporarily set a_bool be 0;
     int option_index = 0;
     char string[11]="n:r:d:c:ha";
     static struct option long_options[] =
@@ -343,6 +342,9 @@ int main(int argc,char*argv[]) {
         k++;}
     Card_Record=card[k];
     Card_valid_Rec=card[k];
+    DiscardPile[n]=card[k];
+    card[k]=-1;
+
     printf("\n\n==========================Game Start============================\n\nFirst card : ");
     Card2Str(Card_valid_Rec);
 
@@ -358,7 +360,9 @@ int main(int argc,char*argv[]) {
     // ==================================the main part of playing cards==============================================
     while (r>0){
         printf("\n\n==========================Round %d============================\n\n",r_1);
-        printf("Game starts with Player %d\n",k_1+1);
+        printf("First card : ");
+        Card2Str(Card_valid_Rec);
+        printf("\n\n Game starts with Player %d\n",k_1+1);
         printf("Dealing cards...\n");
 
         int attack=0,direction=1;// 1 for clockwise 0 for counter-clockwise
@@ -498,22 +502,13 @@ int main(int argc,char*argv[]) {
             for (int j=0;j<=51;j++)
                 *(card+(i-1)*52+j)=j;
         }/* the card is now the pointer of the first 0 0-51->0-51*/
-        ShuffleCard(52 * d, card,(rand()));
+        ShuffleCard(52 * d, card,rand());
+
+        for (int i=0;i<d*52;i++)/* clean discard pile */{
+            DiscardPile[i]=-1;
+        }
         printf("Preparing for another round...\n");
         printf("\n\nShuffling cards,please wait...\n\n\n");
-
-
-
-        if (a_bool) {
-            printf("\nInitial cards stack:\n");
-            for (int j = 0; j < 52 * d; j++) {
-                if (j%MAX_WIDE_NUM==0)
-                    printf("\n");
-                Card2Str(*(card + j));
-            }
-        }
-
-
 
 
         printf("\nRound %d:\n\n",r_1);
@@ -526,10 +521,18 @@ int main(int argc,char*argv[]) {
             for (int j=0;j<MAX_CARD;j++)
                 player[i].card[j]=-1;// -1>>no card
         }
-        for (int i=0;i<n;i++)/* deal cards */{
+        Card_Record=card[0];
+        Card_valid_Rec=card[0];
+        DiscardPile[0]=card[0];
+        card[0]=-1;
+
+        //give each player c cards
+        printf("Dealing cards...\n");
+        for (int i=0;i<n;i++){
             for (int j=0;j<c;j++){
                 Dealer(card,(player1+i));}
         }
+
         k=k_1;
         r--;
         r_1++;
