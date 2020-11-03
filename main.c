@@ -125,6 +125,7 @@ int FirstCardCmp(Player *player,int n){
     return num;//if several player have same card, choose the previous player
 }
 
+
 /*Play a card .i.e add a card to Card_record and DiscardPile;tidy player's card
  * the pointer of player; the sequence number of the card (0-MAX_CARD-1)*/
 void PlayACard(Player *player,int num,int *Card_record,int *Card_valid_Rec,int *DiscardPile){
@@ -562,9 +563,6 @@ int main(int argc,char*argv[]) {
             int attack = 0, direction = 1;// 1 for clockwise 0 for counter-clockwise
             while ((player1 + k_1)->card[0] != -1) /* one player used all his/her cards */
             {
-                printf("\nClick Enter to continue\n");
-                getchar();
-                CLEAR();
                 int valid=0;/* whether players' input are valid */
                 k_1 = k;//adjust the k
                 printf("\nThe previous Card\n");
@@ -728,6 +726,11 @@ int main(int argc,char*argv[]) {
                     //test whether k exceed the range
                     k = KExceed(k, n);
                 }
+                CLEAR();
+                getchar();
+                printf("\nClick Enter to continue\n");
+                printf("Next Player :Player %d",KExceed(k_1+2,n));
+                getchar();
                 CLEAR();
             }
             //---------------------------------One round finished----------------------------
