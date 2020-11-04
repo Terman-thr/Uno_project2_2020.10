@@ -683,7 +683,7 @@ int main(int argc,char*argv[]) {
                             printf("\n\nYou (Player %d) draws: \n", k_1 + 1);
 
                             //show card player draws
-                            SingleCard2Image((player1+k_1)->card[HandCardNum(player1)-1]);
+                            SingleCard2Image((player1+k_1)->card[HandCardNum(player1+k_1)-1]);
                             getchar();
                             getchar();
                         }
@@ -741,7 +741,7 @@ int main(int argc,char*argv[]) {
                                 valid=1;
                             }
                             else{
-                                printf("\n Invalid input!!! Please enter again!\n");
+                                printf("\n Invalid input!!! Please enter choose a special card or draw cards!!!\n");
                             }
                         }
                     }while (valid==0);
