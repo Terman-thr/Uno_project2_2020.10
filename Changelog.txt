@@ -1,5 +1,63 @@
+============================20.11.03===========================
+
+1.Fix bugs of crash by adding initialization after each round.
+
+2.Add Card2Ima and SingleCard2Ima function to complete the bonus of ASCII arts.
+
+3.Fix other small bugs.
+
+4.Add more things to UI.
+
+============================20.11.02===========================
+
+1.Fix the bugs on Winner function.
+
+2.Add CLEAN() function on different OS. (Thanks for BMM's code)
+
+3.Find bugs that the program will crash after round 3 or more.
+
+
+============================20.11.02===========================
+
+1.Fix the bugs on multiple rounds.
+
+2.Fix the bugs on non-accumulative scores
+
+3.Add function Winner to judge who is the winner.
+
+4.Add player mode, but no cleaning the command window
+
+
+============================20.11.01===========================
+
+1.Fix the bug of same result of ShuffleCard by add a new random number.
+
+2.Fix the bug of no reaction after playing attack card, but still bugs when playing 2 attack at
+ clock-wise direction and 3 attack at conterclock-wise direction.
+
+3.Add multiple rounds loop, but have bugs. (can't run properly)
+
+
 ============================20.10.31===========================
+
 1.Fix the bug of function Dealer.
 
+2.Add function Card2str to show players' card.
+
+3.Add function FirstCardcmp to compare the first card and decide who plays card first.
+
+4.Add function ShuffleCard to shuffle card, but always get the same result although there is
+srand(time(NULL)).
+
+5.Add demo mode parts, but after playing an attack card, nothing happens.
+
+
 ============================20.10.28===========================
+
 1.Use getopt_long_only to deal with the command.
+
+2.Add the function Dealer.
+
+3.Add the structure of player.
+
+4.Add the array of card stack and array of discarded cards.
