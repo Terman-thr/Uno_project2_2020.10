@@ -1,6 +1,6 @@
 # The game for One Card
 
-##Program description
+## Program description
 
 ### 1.The main function is in main.c
 
