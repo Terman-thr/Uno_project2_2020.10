@@ -73,7 +73,7 @@ int main(int argc,char*argv[]) {
 
 
     //create n players, clean their hands and initialize their scores
-    Player player[n];
+    Player *player=calloc((unsigned int)n,sizeof(Player));
     Player *player1=&player[0];
     for (int i=0;i<n;i++){
         player[i].score=0;
@@ -82,7 +82,7 @@ int main(int argc,char*argv[]) {
     }
 
     //init the stack, which are d desks of pokers
-    int *card=(int *)calloc(d*52,sizeof(int));
+    int *card=(int *)calloc((unsigned int )d*52,sizeof(int));
     for (int i=1;i<=d;i++){
         for (int j=0;j<=51;j++)
             *(card+(i-1)*52+j)=j;
@@ -111,7 +111,7 @@ int main(int argc,char*argv[]) {
     }
 
     //Initialize the discard pile
-    int *DiscardPile=(int *)calloc(d*52,sizeof(int));
+    int *DiscardPile=(int *)calloc((unsigned int )d*52,sizeof(int));
     for (int i=0;i<d*52;i++){
         *(DiscardPile+i)=-1;
     }/* the card is now the pointer of the first 0  all -1*/
@@ -682,7 +682,7 @@ int main(int argc,char*argv[]) {
         }
     }
     int Winner_num;
-    int *winner=(int *)calloc(n,sizeof(int));
+    int *winner=(int *)calloc((unsigned int )n,sizeof(int));
     for (int i=0;i<n;i++)/* initialize the winner array */{
         *(winner+i)=-1;
     }

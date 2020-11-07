@@ -8,18 +8,18 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/16006/Uno_project2_2020.10/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="p2">
-				<Option output="E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/p2.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug"/>
+				<Option output="C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/p2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/16006/Uno_project2_2020.10/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -29,15 +29,15 @@
 					<Add directory="e:\workspace\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 p2"/>
-					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 p2"/>
+					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="p2/fast">
-				<Option output="E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/p2.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug"/>
+				<Option output="C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/p2.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/16006/Uno_project2_2020.10/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -47,52 +47,58 @@
 					<Add directory="e:\workspace\mingw\bin\../lib/gcc/mingw32/9.2.0/include-fixed"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 p2/fast"/>
-					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 p2/fast"/>
+					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/16006/Uno_project2_2020.10/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug"/>
+				<Option working_dir="C:/Users/16006/Uno_project2_2020.10/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/workspace/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="E:/Codefield/CODE_C/CLionProjects/p2/UI.c">
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/Const.h">
 			<Option target="p2"/>
 		</Unit>
-		<Unit filename="E:/Codefield/CODE_C/CLionProjects/p2/UI.h">
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/OperateCard.c">
 			<Option target="p2"/>
 		</Unit>
-		<Unit filename="E:/Codefield/CODE_C/CLionProjects/p2/card_operator.c">
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/OperateCard.h">
 			<Option target="p2"/>
 		</Unit>
-		<Unit filename="E:/Codefield/CODE_C/CLionProjects/p2/card_operator.h">
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/UI.c">
 			<Option target="p2"/>
 		</Unit>
-		<Unit filename="E:/Codefield/CODE_C/CLionProjects/p2/main.c">
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/UI.h">
 			<Option target="p2"/>
 		</Unit>
-		<Unit filename="E:/Codefield/CODE_C/CLionProjects/p2/poker_total_card.h">
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/main.c">
 			<Option target="p2"/>
 		</Unit>
-		<Unit filename="E:/Codefield/CODE_C/CLionProjects/p2/CMakeLists.txt">
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/test.c">
+			<Option target="p2"/>
+		</Unit>
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/test.h">
+			<Option target="p2"/>
+		</Unit>
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

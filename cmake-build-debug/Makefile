@@ -67,10 +67,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = E:\Codefield\CODE_C\CLionProjects\p2
+CMAKE_SOURCE_DIR = C:\Users\16006\Uno_project2_2020.10
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\16006\Uno_project2_2020.10\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,33 @@ p2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/build
 .PHONY : p2/fast
 
+OperateCard.obj: OperateCard.c.obj
+
+.PHONY : OperateCard.obj
+
+# target to build an object file
+OperateCard.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/OperateCard.c.obj
+.PHONY : OperateCard.c.obj
+
+OperateCard.i: OperateCard.c.i
+
+.PHONY : OperateCard.i
+
+# target to preprocess a source file
+OperateCard.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/OperateCard.c.i
+.PHONY : OperateCard.c.i
+
+OperateCard.s: OperateCard.c.s
+
+.PHONY : OperateCard.s
+
+# target to generate assembly for a file
+OperateCard.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/OperateCard.c.s
+.PHONY : OperateCard.c.s
+
 UI.obj: UI.c.obj
 
 .PHONY : UI.obj
@@ -168,33 +195,6 @@ UI.s: UI.c.s
 UI.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/UI.c.s
 .PHONY : UI.c.s
-
-card_operator.obj: card_operator.c.obj
-
-.PHONY : card_operator.obj
-
-# target to build an object file
-card_operator.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/card_operator.c.obj
-.PHONY : card_operator.c.obj
-
-card_operator.i: card_operator.c.i
-
-.PHONY : card_operator.i
-
-# target to preprocess a source file
-card_operator.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/card_operator.c.i
-.PHONY : card_operator.c.i
-
-card_operator.s: card_operator.c.s
-
-.PHONY : card_operator.s
-
-# target to generate assembly for a file
-card_operator.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/card_operator.c.s
-.PHONY : card_operator.c.s
 
 main.obj: main.c.obj
 
@@ -223,6 +223,33 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/main.c.s
 .PHONY : main.c.s
 
+test.obj: test.c.obj
+
+.PHONY : test.obj
+
+# target to build an object file
+test.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/test.c.obj
+.PHONY : test.c.obj
+
+test.i: test.c.i
+
+.PHONY : test.i
+
+# target to preprocess a source file
+test.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/test.c.i
+.PHONY : test.c.i
+
+test.s: test.c.s
+
+.PHONY : test.s
+
+# target to generate assembly for a file
+test.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/test.c.s
+.PHONY : test.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -232,15 +259,18 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... p2
+	@echo ... OperateCard.obj
+	@echo ... OperateCard.i
+	@echo ... OperateCard.s
 	@echo ... UI.obj
 	@echo ... UI.i
 	@echo ... UI.s
-	@echo ... card_operator.obj
-	@echo ... card_operator.i
-	@echo ... card_operator.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... test.obj
+	@echo ... test.i
+	@echo ... test.s
 .PHONY : help
 
 

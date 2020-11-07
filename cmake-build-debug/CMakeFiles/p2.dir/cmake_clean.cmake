@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/p2.dir/OperateCard.c.obj"
   "CMakeFiles/p2.dir/UI.c.obj"
-  "CMakeFiles/p2.dir/card_operator.c.obj"
   "CMakeFiles/p2.dir/main.c.obj"
+  "CMakeFiles/p2.dir/test.c.obj"
   "libp2.dll.a"
   "p2.exe"
   "p2.exe.manifest"

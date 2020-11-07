@@ -8,7 +8,7 @@
 // total card number ; the first card address
 void ShuffleCard(int CardNum,int *card, int a){
     int tmp;
-    srand(time(NULL));
+    srand((unsigned int )time(NULL));
     int ran;
     for (int i=0;i<CardNum;i++){
         ran=(rand()*a)%(CardNum);

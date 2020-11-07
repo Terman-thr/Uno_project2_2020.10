@@ -4,9 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "E:/Codefield/CODE_C/CLionProjects/p2/UI.c" "E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/CMakeFiles/p2.dir/UI.c.obj"
-  "E:/Codefield/CODE_C/CLionProjects/p2/card_operator.c" "E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/CMakeFiles/p2.dir/card_operator.c.obj"
-  "E:/Codefield/CODE_C/CLionProjects/p2/main.c" "E:/Codefield/CODE_C/CLionProjects/p2/cmake-build-debug/CMakeFiles/p2.dir/main.c.obj"
+  "C:/Users/16006/Uno_project2_2020.10/OperateCard.c" "C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/CMakeFiles/p2.dir/OperateCard.c.obj"
+  "C:/Users/16006/Uno_project2_2020.10/UI.c" "C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/CMakeFiles/p2.dir/UI.c.obj"
+  "C:/Users/16006/Uno_project2_2020.10/main.c" "C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/CMakeFiles/p2.dir/main.c.obj"
+  "C:/Users/16006/Uno_project2_2020.10/test.c" "C:/Users/16006/Uno_project2_2020.10/cmake-build-debug/CMakeFiles/p2.dir/test.c.obj"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

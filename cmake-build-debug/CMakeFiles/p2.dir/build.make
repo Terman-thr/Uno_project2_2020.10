@@ -62,10 +62,10 @@ RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = E:\Codefield\CODE_C\CLionProjects\p2
+CMAKE_SOURCE_DIR = C:\Users\16006\Uno_project2_2020.10
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\16006\Uno_project2_2020.10\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/p2.dir/depend.make
@@ -78,60 +78,75 @@ include CMakeFiles/p2.dir/flags.make
 
 CMakeFiles/p2.dir/main.c.obj: CMakeFiles/p2.dir/flags.make
 CMakeFiles/p2.dir/main.c.obj: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/p2.dir/main.c.obj"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\p2.dir\main.c.obj   -c E:\Codefield\CODE_C\CLionProjects\p2\main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/p2.dir/main.c.obj"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\p2.dir\main.c.obj   -c C:\Users\16006\Uno_project2_2020.10\main.c
 
 CMakeFiles/p2.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/p2.dir/main.c.i"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\Codefield\CODE_C\CLionProjects\p2\main.c > CMakeFiles\p2.dir\main.c.i
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\16006\Uno_project2_2020.10\main.c > CMakeFiles\p2.dir\main.c.i
 
 CMakeFiles/p2.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/p2.dir/main.c.s"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\Codefield\CODE_C\CLionProjects\p2\main.c -o CMakeFiles\p2.dir\main.c.s
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\16006\Uno_project2_2020.10\main.c -o CMakeFiles\p2.dir\main.c.s
 
 CMakeFiles/p2.dir/UI.c.obj: CMakeFiles/p2.dir/flags.make
 CMakeFiles/p2.dir/UI.c.obj: ../UI.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/p2.dir/UI.c.obj"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\p2.dir\UI.c.obj   -c E:\Codefield\CODE_C\CLionProjects\p2\UI.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/p2.dir/UI.c.obj"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\p2.dir\UI.c.obj   -c C:\Users\16006\Uno_project2_2020.10\UI.c
 
 CMakeFiles/p2.dir/UI.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/p2.dir/UI.c.i"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\Codefield\CODE_C\CLionProjects\p2\UI.c > CMakeFiles\p2.dir\UI.c.i
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\16006\Uno_project2_2020.10\UI.c > CMakeFiles\p2.dir\UI.c.i
 
 CMakeFiles/p2.dir/UI.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/p2.dir/UI.c.s"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\Codefield\CODE_C\CLionProjects\p2\UI.c -o CMakeFiles\p2.dir\UI.c.s
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\16006\Uno_project2_2020.10\UI.c -o CMakeFiles\p2.dir\UI.c.s
 
-CMakeFiles/p2.dir/card_operator.c.obj: CMakeFiles/p2.dir/flags.make
-CMakeFiles/p2.dir/card_operator.c.obj: ../card_operator.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/p2.dir/card_operator.c.obj"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\p2.dir\card_operator.c.obj   -c E:\Codefield\CODE_C\CLionProjects\p2\card_operator.c
+CMakeFiles/p2.dir/OperateCard.c.obj: CMakeFiles/p2.dir/flags.make
+CMakeFiles/p2.dir/OperateCard.c.obj: ../OperateCard.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/p2.dir/OperateCard.c.obj"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\p2.dir\OperateCard.c.obj   -c C:\Users\16006\Uno_project2_2020.10\OperateCard.c
 
-CMakeFiles/p2.dir/card_operator.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/p2.dir/card_operator.c.i"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E E:\Codefield\CODE_C\CLionProjects\p2\card_operator.c > CMakeFiles\p2.dir\card_operator.c.i
+CMakeFiles/p2.dir/OperateCard.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/p2.dir/OperateCard.c.i"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\16006\Uno_project2_2020.10\OperateCard.c > CMakeFiles\p2.dir\OperateCard.c.i
 
-CMakeFiles/p2.dir/card_operator.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/p2.dir/card_operator.c.s"
-	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S E:\Codefield\CODE_C\CLionProjects\p2\card_operator.c -o CMakeFiles\p2.dir\card_operator.c.s
+CMakeFiles/p2.dir/OperateCard.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/p2.dir/OperateCard.c.s"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\16006\Uno_project2_2020.10\OperateCard.c -o CMakeFiles\p2.dir\OperateCard.c.s
+
+CMakeFiles/p2.dir/test.c.obj: CMakeFiles/p2.dir/flags.make
+CMakeFiles/p2.dir/test.c.obj: ../test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/p2.dir/test.c.obj"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\p2.dir\test.c.obj   -c C:\Users\16006\Uno_project2_2020.10\test.c
+
+CMakeFiles/p2.dir/test.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/p2.dir/test.c.i"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\16006\Uno_project2_2020.10\test.c > CMakeFiles\p2.dir\test.c.i
+
+CMakeFiles/p2.dir/test.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/p2.dir/test.c.s"
+	E:\workspace\MinGW\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\16006\Uno_project2_2020.10\test.c -o CMakeFiles\p2.dir\test.c.s
 
 # Object files for target p2
 p2_OBJECTS = \
 "CMakeFiles/p2.dir/main.c.obj" \
 "CMakeFiles/p2.dir/UI.c.obj" \
-"CMakeFiles/p2.dir/card_operator.c.obj"
+"CMakeFiles/p2.dir/OperateCard.c.obj" \
+"CMakeFiles/p2.dir/test.c.obj"
 
 # External object files for target p2
 p2_EXTERNAL_OBJECTS =
 
 p2.exe: CMakeFiles/p2.dir/main.c.obj
 p2.exe: CMakeFiles/p2.dir/UI.c.obj
-p2.exe: CMakeFiles/p2.dir/card_operator.c.obj
+p2.exe: CMakeFiles/p2.dir/OperateCard.c.obj
+p2.exe: CMakeFiles/p2.dir/test.c.obj
 p2.exe: CMakeFiles/p2.dir/build.make
 p2.exe: CMakeFiles/p2.dir/linklibs.rsp
 p2.exe: CMakeFiles/p2.dir/objects1.rsp
 p2.exe: CMakeFiles/p2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable p2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable p2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\p2.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -144,6 +159,6 @@ CMakeFiles/p2.dir/clean:
 .PHONY : CMakeFiles/p2.dir/clean
 
 CMakeFiles/p2.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" E:\Codefield\CODE_C\CLionProjects\p2 E:\Codefield\CODE_C\CLionProjects\p2 E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug E:\Codefield\CODE_C\CLionProjects\p2\cmake-build-debug\CMakeFiles\p2.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\16006\Uno_project2_2020.10 C:\Users\16006\Uno_project2_2020.10 C:\Users\16006\Uno_project2_2020.10\cmake-build-debug C:\Users\16006\Uno_project2_2020.10\cmake-build-debug C:\Users\16006\Uno_project2_2020.10\cmake-build-debug\CMakeFiles\p2.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/p2.dir/depend
 
