@@ -699,5 +699,6 @@ int main(int argc,char*argv[]) {
     getchar();
     free(card);
     free(DiscardPile);
+    fclose(fp);
     return 0;
 }
