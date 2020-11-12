@@ -1,6 +1,7 @@
 #include "Const.h"
 #ifndef MAIN_C_TEST_H
 #define MAIN_C_TEST_H
+Player *Loop(int k,Player *player1);
 /*test whether the card can be played
  * Card_valid_Rec; the card player want to play*/
 int TestCard(const int *Card_valid_Rec,const int *card);

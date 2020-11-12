@@ -14,6 +14,8 @@ int str2num(const char *num) {
     }
     return ans;
 }
+
+
 int main(int argc,char*argv[]) {
     welcome();
     int opt;
@@ -62,6 +64,11 @@ int main(int argc,char*argv[]) {
                 printf("Invalid input!");
         }
     }
+
+    if (c>=15 || c*n>=d*52){
+        printf("You have draw too many cards.\n\n");
+        return 0;
+    }
     //define the file
     FILE *fp=fopen(filename,"w");
     printf("---- Initial setup ----\n Number of rounds: %d\n Number of decks: %d\n"
@@ -73,13 +80,8 @@ int main(int argc,char*argv[]) {
 
 
     //create n players, clean their hands and initialize their scores
-    Player *player=calloc((unsigned int)n,sizeof(Player));
-    Player *player1=&player[0];
-    for (int i=0;i<n;i++){
-        player[i].score=0;
-        for (int j=0;j<MAX_CARD;j++)
-            player[i].card[j]=-1;// -1>>no card
-    }
+    Player *player1=Initialize(n);
+
 
     //init the stack, which are d desks of pokers
     int *card=(int *)calloc((unsigned int )d*52,sizeof(int));
@@ -118,7 +120,7 @@ int main(int argc,char*argv[]) {
 
     //Draw the first card and compare
     for (int i=0;i<n;i++)
-        Dealer(card,player1+i);
+        Dealer(card,Loop(i,player1));
     int first=FirstCardCmp(player1,n);/* first : the first player showing cards*/
     printf("\nDetermining the playing order...\n\n");
     fprintf(fp,"\nDetermining the playing order...\n\n");
@@ -127,8 +129,8 @@ int main(int argc,char*argv[]) {
     for (int i=0;i<n;i++){
         printf("Player %d : ",i+1);
         fprintf(fp,"Player %d : ",i+1);
-        Card2Str(player[i].card[0]);
-        WCard2Str(player[i].card[0],fp);
+        Card2Str(Loop(i,player1)->card[0]);
+        WCard2Str(Loop(i,player1)->card[0],fp);
         printf("\n");
         fprintf(fp,"\n");
     }
@@ -140,19 +142,19 @@ int main(int argc,char*argv[]) {
 
     //Discard the first card
     for (int i=0;i<n;i++){
-        PlayACard((player1+i),0,&Card_Record,&Card_valid_Rec,DiscardPile);}
+        PlayACard(Loop(i,player1),0,&Card_Record,&Card_valid_Rec,DiscardPile);}
 
     //give each player c cards
     printf("Dealing cards...\n");
     fprintf(fp,"Dealing cards...\n");
     for (int i=0;i<n;i++){
         for (int j=0;j<c;j++){
-            Dealer(card,(player1+i));}
+            Dealer(card,Loop(i,player1));}
     }
 
     //sort players' cards
     for (int i=0;i<n;i++)
-        bubble_sort((player1+i)->card,HandCardNum(player1+i));
+        bubble_sort((Loop(i,player1))->card,HandCardNum(Loop(i,player1)));
 
     /* show what players have in **demo** mode */
     if (a_bool){
@@ -160,8 +162,8 @@ int main(int argc,char*argv[]) {
             printf("\n Player %d:",i+1);
             fprintf(fp,"\n Player %d:",i+1);
             for (int j=0;j<c;j++){
-                Card2Str(player[i].card[j]);
-                WCard2Str(player[i].card[j],fp);
+                Card2Str(Loop(i,player1)->card[j]);
+                WCard2Str(Loop(i,player1)->card[j],fp);
             }
         }
     }
@@ -208,11 +210,11 @@ int main(int argc,char*argv[]) {
             fprintf(fp,"Dealing cards...\n");
 
             int attack = 0, direction = 1;// 1 for clockwise 0 for counter-clockwise
-            while ((player1 + k_1)->card[0] != -1) /* one player used all his/her cards */
+            while (Loop(k_1,player1)->card[0] != -1) /* one player used all his/her cards */
             {
                 //sort players' cards
                 for (int i=0;i<n;i++)
-                    bubble_sort((player1+i)->card,HandCardNum(player1+i));
+                    bubble_sort((Loop(i,player1))->card,HandCardNum(Loop(i,player1)));
 
                 k_1 = k;//adjust the k
                 /* ------------------------------if there is no attack--------------------------- */
@@ -221,21 +223,21 @@ int main(int argc,char*argv[]) {
                         //ensure the card serial number is valid
                         if (SerialNum == MAX_CARD)/* the player have to draw a card */{
                             ShuffleDiscardPile(DiscardPile, card, d,fp);
-                            Dealer(card, player1 + k);
+                            Dealer(card, Loop(k,player1));
                             printf("\n\nPlayer %d draws: ", k_1 + 1); //demo mode
                             fprintf(fp,"\n\nPlayer %d draws: ", k_1 + 1);
 
-                            while ((player1 + k_1)->card[t] != -1) { t++; }
-                            Card2Str((player1 + k_1)->card[t - 1]);
-                            WCard2Str((player1 + k_1)->card[t - 1],fp);
+                            while ((Loop(k_1,player1))->card[t] != -1) { t++; }
+                            Card2Str((Loop(k_1,player1))->card[t - 1]);
+                            WCard2Str((Loop(k_1,player1))->card[t - 1],fp);
                             t = 0;
 
                             printf("\nPlayer %d's card(s): ", k_1 + 1);//show
                             fprintf(fp,"\nPlayer %d's card(s): ", k_1 + 1);
-                            bubble_sort((player1+k)->card,HandCardNum(player1+k_1));
-                            while ((player1 + k_1)->card[t] != -1) {
-                                Card2Str((player1 + k_1)->card[t]);
-                                WCard2Str((player1 + k_1)->card[t],fp);
+                            bubble_sort((Loop(k,player1))->card,HandCardNum(Loop(k_1,player1)));
+                            while ((Loop(k_1,player1))->card[t] != -1) {
+                                Card2Str((Loop(k_1,player1))->card[t]);
+                                WCard2Str((Loop(k_1,player1))->card[t],fp);
                                 printf("  ");
                                 fprintf(fp,"  ");
                                 t++;
@@ -243,14 +245,14 @@ int main(int argc,char*argv[]) {
                             t = 0;//reset the t;
                             break;
                         }
-                        if (TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum])) /* fit rank or suit */
+                        if (TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum])) /* fit rank or suit */
                         {
                             printf("\n\nPlayer %d plays: ", k_1 + 1); //demo mode
                             fprintf(fp,"\n\nPlayer %d plays: ", k_1 + 1);
-                            Card2Str((player1 + k)->card[SerialNum]);
-                            WCard2Str((player1 + k)->card[SerialNum],fp);
+                            Card2Str((Loop(k,player1))->card[SerialNum]);
+                            WCard2Str((Loop(k,player1))->card[SerialNum],fp);
 
-                            switch ((player1 + k)->card[SerialNum] % 13) /* test whether they are special cards */{
+                            switch ((Loop(k,player1))->card[SerialNum] % 13) /* test whether they are special cards */{
                                 case 9: //J
                                     k = direction ? (k + 1) : (k - 1);
                                     break;
@@ -264,13 +266,13 @@ int main(int argc,char*argv[]) {
                                     attack = 3;
                                     break;
                             }
-                            PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                            PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                             //show the cards
                             printf("\nPlayer %d's card(s): ", k_1 + 1);//demo mode
                             fprintf(fp,"\nPlayer %d's card(s): ", k_1 + 1);
-                            while ((player1 + k_1)->card[t] != -1)/* show */{
-                                Card2Str((player1 + k_1)->card[t]);
-                                WCard2Str((player1 + k_1)->card[t],fp);
+                            while ((Loop(k_1,player1))->card[t] != -1)/* show */{
+                                Card2Str((Loop(k_1,player1))->card[t]);
+                                WCard2Str((Loop(k_1,player1))->card[t],fp);
                                 printf("  ");
                                 fprintf(fp,"  ");
                                 t++;
@@ -286,19 +288,19 @@ int main(int argc,char*argv[]) {
                 }
                     /* ------------------------there is an attack --------------------------*/
                 else {
-                    Hand_poker_num = HandCardNum(player1 + k_1);
+                    Hand_poker_num = HandCardNum(Loop(k_1,player1));
                     for (SerialNum = 0; SerialNum < MAX_CARD + 1; SerialNum++) {
                         //ensure the card serial number is valid
                         if (SerialNum == MAX_CARD)/* player have no card to play i.e. draw many cards */{
                             for (int i = 0; i < attack; i++)/* draw card*/{
                                 ShuffleDiscardPile(DiscardPile, card, d,fp);
-                                Dealer(card, player1 + k_1);
+                                Dealer(card, Loop(k_1,player1));
                             }
                             printf("\n\nPlayer %d draws :", k_1 + 1);
                             fprintf(fp,"\n\nPlayer %d draws :", k_1 + 1);
                             for (t = 0; t < attack; t++) {
-                                Card2Str((player1 + k_1)->card[Hand_poker_num + t]);
-                                WCard2Str((player1 + k_1)->card[Hand_poker_num + t],fp);
+                                Card2Str((Loop(k_1,player1))->card[Hand_poker_num + t]);
+                                WCard2Str((Loop(k_1,player1))->card[Hand_poker_num + t],fp);
                                 printf("   ");
                                 fprintf(fp,"   ");
                             }
@@ -307,10 +309,10 @@ int main(int argc,char*argv[]) {
                             attack = 0;
                             printf("\nPlayer %d's card(s): ", k_1 + 1);//show
                             fprintf(fp,"\nPlayer %d's card(s): ", k_1 + 1);
-                            bubble_sort((player1+k)->card,HandCardNum(player1+k_1));
-                            while ((player1 + k_1)->card[t] != -1) {
-                                Card2Str((player1 + k_1)->card[t]);
-                                WCard2Str((player1 + k_1)->card[t],fp);
+                            bubble_sort((Loop(k,player1))->card,HandCardNum(Loop(k_1,player1)));
+                            while ((Loop(k_1,player1))->card[t] != -1) {
+                                Card2Str((Loop(k_1,player1))->card[t]);
+                                WCard2Str((Loop(k_1,player1))->card[t],fp);
                                 printf("  ");
                                 fprintf(fp,"  ");
                                 t++;
@@ -320,41 +322,41 @@ int main(int argc,char*argv[]) {
                         }
 
                         /* if he has special cards */
-                        if (TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum])/* not fit rank or suit */
-                            && ((player1 + k)->card[SerialNum] % 13 == 5
-                                || (player1 + k)->card[SerialNum] % 13 == 0
-                                || (player1 + k)->card[SerialNum] % 13 == 1
-                                || (player1 + k)->card[SerialNum] % 13 == 9
-                                || (player1 + k)->card[SerialNum] % 13 == 10)) {
-                            switch ((player1 + k)->card[SerialNum] % 13) {
+                        if (TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum])/* not fit rank or suit */
+                            && ((Loop(k,player1))->card[SerialNum] % 13 == 5
+                                || (Loop(k,player1))->card[SerialNum] % 13 == 0
+                                || (Loop(k,player1))->card[SerialNum] % 13 == 1
+                                || (Loop(k,player1))->card[SerialNum] % 13 == 9
+                                || (Loop(k,player1))->card[SerialNum] % 13 == 10)) {
+                            switch ((Loop(k,player1))->card[SerialNum] % 13) {
                                 case 5: //7
                                     attack = 0;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
-                                    PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                    PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
                                     break;
                                 case 0: //2
                                     attack += 2;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
-                                    PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                    PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
                                     break;
                                 case 1: //3
                                     attack += 3;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
-                                    PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                    PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
                                     break;
                                 case 9: //J
                                     k = direction ? (k + 1) : (k - 1);
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
-                                    PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                    PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
                                     break;
                                 case 10: //Q
                                     direction = !direction;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
-                                    PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                    PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
                                     break;
                             }
@@ -387,9 +389,9 @@ int main(int argc,char*argv[]) {
             printf("\n---- Stats ----\nRound %d Result :\n\n", r_1);
             fprintf(fp,"\n---- Stats ----\nRound %d Result :\n\n", r_1);
             for (int i = 0; i < n; i++)/* calculate players score */{
-                (player1 + i)->score = (player1 + i)->score - HandCardNum(player1 + i);
-                printf("Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(player1 + i), (player1 + i)->score);
-                fprintf(fp,"Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(player1 + i), (player1 + i)->score);
+                (Loop(i,player1))->score = (Loop(i,player1))->score - HandCardNum(Loop(i,player1));
+                printf("Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(Loop(i,player1)), (Loop(i,player1))->score);
+                fprintf(fp,"Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(Loop(i,player1)), (Loop(i,player1))->score);
             }
             printf("\n\nRound %d ends \n\n",r_1);
             fprintf(fp,"\n\nRound %d ends \n\n",r_1);
@@ -397,7 +399,7 @@ int main(int argc,char*argv[]) {
             //clean players' hand poker and re-deal cards
             for (int i = 0; i < n; i++)/* clean hands */{
                 for (int j = 0; j < MAX_CARD; j++)
-                    player[i].card[j] = -1;// -1>>no card
+                    Loop(i,player1)->card[j] = -1;// -1>>no card
             }
             Card_Record = card[0];
             Card_valid_Rec = card[0];
@@ -410,7 +412,7 @@ int main(int argc,char*argv[]) {
                 fprintf(fp, "Dealing cards...\n");
                 for (int i = 0; i < n; i++) {
                     for (int j = 0; j < c; j++) {
-                        Dealer(card, (player1 + i));
+                        Dealer(card, (Loop(i,player1)));
                     }
                 }
             }
@@ -429,12 +431,12 @@ int main(int argc,char*argv[]) {
             fprintf(fp,"\n\n Game starts with Player %d\n", k_1+1);
             fprintf(fp,"Dealing cards...\n");
             int attack = 0, direction = 1;// 1 for clockwise 0 for counter-clockwise
-            while ((player1 + k_1)->card[0] != -1) /* one player used all his/her cards */
+            while ((Loop(k_1,player1))->card[0] != -1) /* one player used all his/her cards */
             {
 
                 //sort players' cards
                 for (int i=0;i<n;i++)
-                    bubble_sort((player1+i)->card,HandCardNum(player1+i));
+                    bubble_sort((Loop(i,player1))->card,HandCardNum(Loop(i,player1)));
 
                 int valid=0;/* whether players' input are valid */
                 k_1 = k;//adjust the k
@@ -447,9 +449,9 @@ int main(int argc,char*argv[]) {
                     printf("\n\nYour (Player %d's) card(s): \n", k_1 + 1);
                     fprintf(fp,"\n\nPlayer %d's card(s): \n", k_1 + 1);
 
-                    Card2Ima(HandCardNum(player1+k_1),(player1+k_1)->card);
-                    while ((player1 + k_1)->card[t] != -1) {
-                        WCard2Str((player1 + k_1)->card[t],fp);
+                    Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
+                    while ((Loop(k_1,player1))->card[t] != -1) {
+                        WCard2Str((Loop(k_1,player1))->card[t],fp);
                         fprintf(fp,"  ");
                         t++;
                     }
@@ -462,8 +464,8 @@ int main(int argc,char*argv[]) {
 
                         //exclude invalid input
                         if (scanf("%d",&SerialNum)) {
-                            if ((SerialNum >= -1 && SerialNum < HandCardNum(player1 + k_1)
-                                 && TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum]))
+                            if ((SerialNum >= -1 && SerialNum < HandCardNum(Loop(k_1,player1))
+                                 && TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum]))
                                 ||SerialNum == -1) {
                                 valid=1;
                             }
@@ -476,12 +478,12 @@ int main(int argc,char*argv[]) {
                     //ensure the card serial number is valid
                     if (SerialNum == -1)/* the player have to draw a card */{
                         ShuffleDiscardPile(DiscardPile, card, d,fp);
-                        Dealer(card, player1 + k);
+                        Dealer(card, Loop(k,player1));
                         printf("\n\nYou (Player %d) draws: \n", k_1 + 1);
                         fprintf(fp,"\n\nPlayer %d draws: \n", k_1 + 1);
                         //show card player draws
-                        SingleCard2Image((player1+k_1)->card[HandCardNum(player1+k_1)-1]);
-                        WCard2Str((player1+k_1)->card[HandCardNum(player1+k_1)-1],fp);
+                        SingleCard2Image((Loop(k_1,player1))->card[HandCardNum(Loop(k_1,player1))-1]);
+                        WCard2Str((Loop(k_1,player1))->card[HandCardNum(Loop(k_1,player1))-1],fp);
 
                         printf("\nPress Enter to continue\n");
                         getchar();
@@ -491,9 +493,9 @@ int main(int argc,char*argv[]) {
                     {
                         printf("\n\nYou (Player %d) plays: \n", k_1 + 1); //demo mode
                         fprintf(fp,"\n\nPlayer %d plays: \n", k_1 + 1);
-                        SingleCard2Image((player1 + k)->card[SerialNum]);
-                        WCard2Str((player1 + k)->card[SerialNum],fp);
-                        switch ((player1 + k)->card[SerialNum] % 13) /* test whether they are special cards */{
+                        SingleCard2Image((Loop(k,player1))->card[SerialNum]);
+                        WCard2Str((Loop(k,player1))->card[SerialNum],fp);
+                        switch ((Loop(k,player1))->card[SerialNum] % 13) /* test whether they are special cards */{
                             case 9: //J
                                 k = direction ? (k + 1) : (k - 1);
                                 break;
@@ -507,7 +509,7 @@ int main(int argc,char*argv[]) {
                                 attack = 3;
                                 break;
                         }
-                        PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                        PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                         printf("\nPress Enter to continue\n");
                         getchar();
                         getchar();
@@ -520,14 +522,14 @@ int main(int argc,char*argv[]) {
                 }
                     /* ------------------------there is an attack --------------------------*/
                 else {
-                    Hand_poker_num = HandCardNum(player1 + k_1);
+                    Hand_poker_num = HandCardNum(Loop(k_1,player1));
 
                     t=0;
                     printf("\nYour (Player %d's) card(s): \n", k_1 + 1);//show
                     fprintf(fp,"\nPlayer %d's card(s): \n", k_1 + 1);
-                    Card2Ima(Hand_poker_num,(player1+k_1)->card);
-                    while ((player1 + k_1)->card[t] != -1) {
-                        WCard2Str((player1 + k_1)->card[t],fp);
+                    Card2Ima(Hand_poker_num,(Loop(k_1,player1))->card);
+                    while ((Loop(k_1,player1))->card[t] != -1) {
+                        WCard2Str((Loop(k_1,player1))->card[t],fp);
                         fprintf(fp,"  ");
                         t++;
                     }
@@ -540,12 +542,12 @@ int main(int argc,char*argv[]) {
                         //exclude invalid input
                         if (scanf("%d",&SerialNum)) {
                             if ((SerialNum >= -1 && SerialNum < Hand_poker_num
-                                 && (TestCard(&Card_valid_Rec, &(player1 + k)->card[SerialNum])/* not fit rank or suit */
-                                     && ((player1 + k)->card[SerialNum] % 13 == 5
-                                         || (player1 + k)->card[SerialNum] % 13 == 0
-                                         || (player1 + k)->card[SerialNum] % 13 == 1
-                                         || (player1 + k)->card[SerialNum] % 13 == 9
-                                         || (player1 + k)->card[SerialNum] % 13 == 10)))
+                                 && (TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum])/* not fit rank or suit */
+                                     && ((Loop(k,player1))->card[SerialNum] % 13 == 5
+                                         || (Loop(k,player1))->card[SerialNum] % 13 == 0
+                                         || (Loop(k,player1))->card[SerialNum] % 13 == 1
+                                         || (Loop(k,player1))->card[SerialNum] % 13 == 9
+                                         || (Loop(k,player1))->card[SerialNum] % 13 == 10)))
                                 || SerialNum == -1) {
                                 valid=1;
                             }
@@ -559,13 +561,13 @@ int main(int argc,char*argv[]) {
                     if (SerialNum ==-1)/* player have no card to play i.e. draw many cards */{
                         for (int i = 0; i < attack; i++)/* draw card*/{
                             ShuffleDiscardPile(DiscardPile, card, d,fp);
-                            Dealer(card, player1 + k_1);
+                            Dealer(card, Loop(k_1,player1));
                         }
                         printf("\n\nYou (Player %d) draw :\n", k_1 + 1);
                         fprintf(fp,"\n\nPlayer %d draw :\n", k_1 + 1);
-                        Card2Ima(attack,(player1+k_1)->card+Hand_poker_num);
+                        Card2Ima(attack,(Loop(k_1,player1))->card+Hand_poker_num);
                         for (int i=0;i<attack;i++) {
-                            WCard2Str(*((player1 + k_1)->card + Hand_poker_num+i), fp);
+                            WCard2Str(*((Loop(k_1,player1))->card + Hand_poker_num+i), fp);
                         }
                         printf("\nPress Enter to continue\n");
                         getchar();
@@ -574,46 +576,46 @@ int main(int argc,char*argv[]) {
                     }
                         /* if he has special cards */
                     else{
-                        switch ((player1 + k_1)->card[SerialNum] % 13) {
+                        switch ((Loop(k_1,player1))->card[SerialNum] % 13) {
                             case 5: //7
                                 attack = 0;
                                 printf("You played :\n");
                                 fprintf(fp,"Player played :\n");
-                                WCard2Str((player1 + k_1)->card[SerialNum],fp);
-                                SingleCard2Image((player1 + k_1)->card[SerialNum]);
-                                PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                WCard2Str((Loop(k_1,player1))->card[SerialNum],fp);
+                                SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
+                                PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                 break;
                             case 0: //2
                                 attack += 2;
                                 printf("You played :\n");
                                 fprintf(fp,"Player played :\n");
-                                WCard2Str((player1 + k_1)->card[SerialNum],fp);
-                                SingleCard2Image((player1 + k_1)->card[SerialNum]);
-                                PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                WCard2Str((Loop(k_1,player1))->card[SerialNum],fp);
+                                SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
+                                PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                 break;
                             case 1: //3
                                 attack += 3;
                                 printf("You played :\n");
                                 fprintf(fp,"Player played :\n");
-                                WCard2Str((player1 + k_1)->card[SerialNum],fp);
-                                SingleCard2Image((player1 + k_1)->card[SerialNum]);
-                                PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                WCard2Str((Loop(k_1,player1))->card[SerialNum],fp);
+                                SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
+                                PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                 break;
                             case 9: //J
                                 k = direction ? (k + 1) : (k - 1);
                                 printf("You played :\n");
                                 fprintf(fp,"Player played :\n");
-                                WCard2Str((player1 + k_1)->card[SerialNum],fp);
-                                SingleCard2Image((player1 + k_1)->card[SerialNum]);
-                                PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                WCard2Str((Loop(k_1,player1))->card[SerialNum],fp);
+                                SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
+                                PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                 break;
                             case 10: //Q
                                 direction = !direction;
                                 printf("You played :\n");
                                 fprintf(fp,"Player played :\n");
-                                WCard2Str((player1 + k_1)->card[SerialNum],fp);
-                                SingleCard2Image((player1 + k_1)->card[SerialNum]);
-                                PlayACard(player1 + k_1, SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
+                                WCard2Str((Loop(k_1,player1))->card[SerialNum],fp);
+                                SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
+                                PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                 break;
                         }
                         printf("\nPress Enter to continue\n");
@@ -650,9 +652,9 @@ int main(int argc,char*argv[]) {
             printf("\n---- Stats ----\nRound %d result:\n\n", r_1);
             fprintf(fp,"\n---- Stats ----\nRound %d result:\n\n", r_1);
             for (int i = 0; i < n; i++)/* calculate players score */{
-                (player1 + i)->score = (player1 + i)->score - HandCardNum(player1 + i);
-                printf("Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(player1 + i), (player1 + i)->score);
-                fprintf(fp,"Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(player1 + i), (player1 + i)->score);
+                (Loop(i,player1))->score = (Loop(i,player1))->score - HandCardNum(Loop(i,player1));
+                printf("Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(Loop(i,player1)), (Loop(i,player1))->score);
+                fprintf(fp,"Player %d :%d ,total: %d\n ", i + 1,- HandCardNum(Loop(i,player1)), (Loop(i,player1))->score);
             }
             printf("\n\nRound %d ends \n\n",r_1);
             fprintf(fp,"\n\nRound %d ends \n\n",r_1);
@@ -660,7 +662,7 @@ int main(int argc,char*argv[]) {
             //clean players' hand poker and re-deal cards
             for (int i = 0; i < n; i++)/* clean hands */{
                 for (int j = 0; j < MAX_CARD; j++)
-                    player[i].card[j] = -1;// -1>>no card
+                    Loop(i,player1)->card[j] = -1;// -1>>no card
             }
             Card_Record = card[0];
             Card_valid_Rec = card[0];
@@ -672,7 +674,7 @@ int main(int argc,char*argv[]) {
                 printf("Dealing cards...\n");
                 for (int i = 0; i < n; i++) {
                     for (int j = 0; j < c; j++) {
-                        Dealer(card, (player1 + i));
+                        Dealer(card, (Loop(i,player1)));
                     }
                 }
             }

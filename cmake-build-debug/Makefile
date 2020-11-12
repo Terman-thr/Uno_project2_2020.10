@@ -142,6 +142,33 @@ p2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/build
 .PHONY : p2/fast
 
+Const.obj: Const.c.obj
+
+.PHONY : Const.obj
+
+# target to build an object file
+Const.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/Const.c.obj
+.PHONY : Const.c.obj
+
+Const.i: Const.c.i
+
+.PHONY : Const.i
+
+# target to preprocess a source file
+Const.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/Const.c.i
+.PHONY : Const.c.i
+
+Const.s: Const.c.s
+
+.PHONY : Const.s
+
+# target to generate assembly for a file
+Const.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/Const.c.s
+.PHONY : Const.c.s
+
 OperateCard.obj: OperateCard.c.obj
 
 .PHONY : OperateCard.obj
@@ -168,6 +195,33 @@ OperateCard.s: OperateCard.c.s
 OperateCard.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/OperateCard.c.s
 .PHONY : OperateCard.c.s
+
+PlayPart.obj: PlayPart.c.obj
+
+.PHONY : PlayPart.obj
+
+# target to build an object file
+PlayPart.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/PlayPart.c.obj
+.PHONY : PlayPart.c.obj
+
+PlayPart.i: PlayPart.c.i
+
+.PHONY : PlayPart.i
+
+# target to preprocess a source file
+PlayPart.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/PlayPart.c.i
+.PHONY : PlayPart.c.i
+
+PlayPart.s: PlayPart.c.s
+
+.PHONY : PlayPart.s
+
+# target to generate assembly for a file
+PlayPart.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\p2.dir\build.make CMakeFiles/p2.dir/PlayPart.c.s
+.PHONY : PlayPart.c.s
 
 UI.obj: UI.c.obj
 
@@ -259,9 +313,15 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... p2
+	@echo ... Const.obj
+	@echo ... Const.i
+	@echo ... Const.s
 	@echo ... OperateCard.obj
 	@echo ... OperateCard.i
 	@echo ... OperateCard.s
+	@echo ... PlayPart.obj
+	@echo ... PlayPart.i
+	@echo ... PlayPart.s
 	@echo ... UI.obj
 	@echo ... UI.i
 	@echo ... UI.s

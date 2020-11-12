@@ -1,5 +1,7 @@
 #include "test.h"
 #include "Const.h"
+
+
 /*test whether the card can be played
  * Card_valid_Rec; the card player want to play*/
 int TestCard(const int *Card_valid_Rec,const int *card){
@@ -50,8 +52,8 @@ int FirstCardCmp(Player *player,int n){
     int num=0;/*the number of player with max card*/
     int tmp=player->card[0];
     for (int i=1;i<n;i++){
-        if (tmp<(player+i)->card[0]){
-            tmp=(player+i)->card[0];
+        if (tmp<Loop(i,player)->card[0]){
+            tmp=Loop(i,player)->card[0];
             num=i;
         }
     }
@@ -63,10 +65,10 @@ int Winner(int n,Player *player,int *winner){
     int winner_num=0;
     int max=player->score;
     for (int i=0;i<n;i++)/* get the max score */{
-        max=(max<(player+i)->score)?((player+i)->score):(max);
+        max=(max<(Loop(i,player))->score)?((Loop(i,player))->score):(max);
     }
     for (int i=0;i<n;i++){
-        if (max==(player+i)->score){
+        if (max==(Loop(i,player))->score){
             *(winner+winner_num)=i;
             winner_num++;
         }

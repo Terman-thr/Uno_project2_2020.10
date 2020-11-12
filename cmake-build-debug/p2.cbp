@@ -74,6 +74,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/Const.c">
+			<Option target="p2"/>
+		</Unit>
 		<Unit filename="C:/Users/16006/Uno_project2_2020.10/Const.h">
 			<Option target="p2"/>
 		</Unit>
@@ -81,6 +84,12 @@
 			<Option target="p2"/>
 		</Unit>
 		<Unit filename="C:/Users/16006/Uno_project2_2020.10/OperateCard.h">
+			<Option target="p2"/>
+		</Unit>
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/PlayPart.c">
+			<Option target="p2"/>
+		</Unit>
+		<Unit filename="C:/Users/16006/Uno_project2_2020.10/PlayPart.h">
 			<Option target="p2"/>
 		</Unit>
 		<Unit filename="C:/Users/16006/Uno_project2_2020.10/UI.c">
