@@ -24,4 +24,6 @@ void SingleCard2Image(int num);//display a single card
 /*draw a ASCII image
  * number of cards; card pointer*/
 void Card2Ima(int num,const int *card);
+
+int GetValidInput(int Card_valid_Rec,int k,int k_1,int a_bool,Player *player1,int attack);//get valid input
 #endif //MAIN_C_UI_H

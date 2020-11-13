@@ -15,6 +15,7 @@ CMakeFiles/p2.dir/PlayPart.c.obj: ../OperateCard.h
 CMakeFiles/p2.dir/PlayPart.c.obj: ../PlayPart.c
 CMakeFiles/p2.dir/PlayPart.c.obj: ../PlayPart.h
 CMakeFiles/p2.dir/PlayPart.c.obj: ../UI.h
+CMakeFiles/p2.dir/PlayPart.c.obj: ../test.h
 
 CMakeFiles/p2.dir/UI.c.obj: ../Const.h
 CMakeFiles/p2.dir/UI.c.obj: ../UI.c

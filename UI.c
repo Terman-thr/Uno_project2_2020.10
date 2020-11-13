@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "UI.h"
 #include "Const.h"
+#include "test.h"
+
 void welcome(void){
     printf("########################\n"
            "#                      #\n"
@@ -144,3 +146,48 @@ void SingleCard2Image(int num){
     printf("-------\n");
 }
 
+//get valid input
+int GetValidInput(int Card_valid_Rec,int k,int k_1,int a_bool,Player *player1,int attack) {
+    int SerialNum;
+    int valid = 0;
+    if (a_bool == 0 && attack==0) {
+        do {
+            printf("\nPlease choose the card you play and enter the serial number under the card\n ");
+            printf("Enter -1 for draw a card.(No attack)\n");
+
+            //exclude invalid input
+            if (scanf("%d", &SerialNum)) {
+                if ((SerialNum >= -1 && SerialNum < HandCardNum(Loop(k_1, player1))
+                     && TestCard(&Card_valid_Rec, &(Loop(k, player1))->card[SerialNum]))
+                    || SerialNum == -1) {
+                    valid = 1;
+                } else {
+                    printf("\n Invalid input!!! Please enter again!\n");
+                }
+            }
+        } while (valid == 0);
+    } else {
+        do{
+            printf("\nPlease choose the card you play and enter the serial number under the card\n ");
+            printf("Enter -1 for draw a card.(An attack)\n");
+
+            //exclude invalid input
+            if (scanf("%d",&SerialNum)) {
+                if ((SerialNum >= -1 && SerialNum < HandCardNum(Loop(k_1, player1))
+                     && (TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum])/* not fit rank or suit */
+                         && ((Loop(k,player1))->card[SerialNum] % 13 == 5
+                             || (Loop(k,player1))->card[SerialNum] % 13 == 0
+                             || (Loop(k,player1))->card[SerialNum] % 13 == 1
+                             || (Loop(k,player1))->card[SerialNum] % 13 == 9
+                             || (Loop(k,player1))->card[SerialNum] % 13 == 10)))
+                    || SerialNum == -1) {
+                    valid=1;
+                }
+                else{
+                    printf("\n Invalid input!!! Please enter choose a special card or draw cards!!!\n");
+                }
+            }
+        }while (valid==0);
+    }
+    return SerialNum;
+}

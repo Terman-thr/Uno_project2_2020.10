@@ -8,6 +8,22 @@
 
 C:/Users/16006/Uno_project2_2020.10/Const.h
 
+C:/Users/16006/Uno_project2_2020.10/OperateCard.c
+OperateCard.h
+C:/Users/16006/Uno_project2_2020.10/OperateCard.h
+Const.h
+C:/Users/16006/Uno_project2_2020.10/Const.h
+time.h
+-
+stdlib.h
+-
+stdio.h
+-
+UI.h
+C:/Users/16006/Uno_project2_2020.10/UI.h
+test.h
+C:/Users/16006/Uno_project2_2020.10/test.h
+
 C:/Users/16006/Uno_project2_2020.10/OperateCard.h
 stdio.h
 -
@@ -21,8 +37,6 @@ UI.h
 C:/Users/16006/Uno_project2_2020.10/UI.h
 time.h
 C:/Users/16006/Uno_project2_2020.10/time.h
-time.h
--
 stdlib.h
 -
 PlayPart.h
@@ -31,14 +45,26 @@ stdio.h
 -
 OperateCard.h
 C:/Users/16006/Uno_project2_2020.10/OperateCard.h
+test.h
+C:/Users/16006/Uno_project2_2020.10/test.h
 
 C:/Users/16006/Uno_project2_2020.10/PlayPart.h
 stdio.h
 -
 
+C:/Users/16006/Uno_project2_2020.10/UI.c
+stdio.h
+-
+UI.h
 C:/Users/16006/Uno_project2_2020.10/UI.h
 Const.h
 C:/Users/16006/Uno_project2_2020.10/Const.h
+
+C:/Users/16006/Uno_project2_2020.10/UI.h
+Const.h
+C:/Users/16006/Uno_project2_2020.10/Const.h
+stdio.h
+-
 
 C:/Users/16006/Uno_project2_2020.10/main.c
 stdio.h

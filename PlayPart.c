@@ -6,13 +6,11 @@
 #include <stdio.h>
 #include "OperateCard.h"
 #include "test.h"
+
 void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
     //-------------------------------------the card part----------------------------------------------------------------
-
-
     //create n players, clean their hands and initialize their scores
     Player *player1=Initialize(n);
-
 
     //init the stack, which are d desks of pokers
     int *card=(int *)calloc((unsigned int )d*52,sizeof(int));
@@ -369,7 +367,6 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                 for (int i=0;i<n;i++)
                     bubble_sort((Loop(i,player1))->card,HandCardNum(Loop(i,player1)));
 
-                int valid=0;/* whether players' input are valid */
                 k_1 = k;//adjust the k
                 printf("\nThe previous Card\n");
                 SingleCard2Image(Card_valid_Rec);
@@ -389,22 +386,7 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                     t = 0;//reset the t;
 
                     //Get valid input
-                    do{
-                        printf("\nPlease choose the card you play and enter the serial number under the card\n ");
-                        printf("Enter -1 for draw a card.(No attack)\n");
-
-                        //exclude invalid input
-                        if (scanf("%d",&SerialNum)) {
-                            if ((SerialNum >= -1 && SerialNum < HandCardNum(Loop(k_1,player1))
-                                 && TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum]))
-                                ||SerialNum == -1) {
-                                valid=1;
-                            }
-                            else{
-                                printf("\n Invalid input!!! Please enter again!\n");
-                            }
-                        }
-                    }while (valid==0);
+                    SerialNum=GetValidInput(Card_valid_Rec,k,k_1,a_bool,player1,attack);
 
                     //ensure the card serial number is valid
                     if (SerialNum == -1)/* the player have to draw a card */{
@@ -466,27 +448,7 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                     }
 
                     //Get valid input
-                    do{
-                        printf("\nPlease choose the card you play and enter the serial number under the card\n ");
-                        printf("Enter -1 for draw a card.(An attack)\n");
-
-                        //exclude invalid input
-                        if (scanf("%d",&SerialNum)) {
-                            if ((SerialNum >= -1 && SerialNum < Hand_poker_num
-                                 && (TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum])/* not fit rank or suit */
-                                     && ((Loop(k,player1))->card[SerialNum] % 13 == 5
-                                         || (Loop(k,player1))->card[SerialNum] % 13 == 0
-                                         || (Loop(k,player1))->card[SerialNum] % 13 == 1
-                                         || (Loop(k,player1))->card[SerialNum] % 13 == 9
-                                         || (Loop(k,player1))->card[SerialNum] % 13 == 10)))
-                                || SerialNum == -1) {
-                                valid=1;
-                            }
-                            else{
-                                printf("\n Invalid input!!! Please enter choose a special card or draw cards!!!\n");
-                            }
-                        }
-                    }while (valid==0);
+                    SerialNum=GetValidInput(Card_valid_Rec,k,k_1,a_bool,player1,attack);
 
                     //ensure the card serial number is valid
                     if (SerialNum ==-1)/* player have no card to play i.e. draw many cards */{
