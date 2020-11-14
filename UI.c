@@ -46,19 +46,17 @@ void WCard2Str(int num,FILE *fp) {
 /*show what he played
  * the player1;the sequence number of the card ;k_1 */
 void ShowPlayedCard(Player *player1,int CardNum,int k_1,FILE *fp) {
-    printf("\n\nPlayer %d plays : ", k_1 + 1);
+    printf("\n\nPlayer %d plays : \n", k_1 + 1);
     fprintf(fp,"\n\nPlayer %d plays : ", k_1 + 1);
-    Card2Str((Loop(k_1,player1))->card[CardNum]);
     WCard2Str((Loop(k_1,player1))->card[CardNum],fp);
-    printf("\nPlayer %d's card(s) : ", k_1 + 1);
-    fprintf(fp,"\nPlayer %d's card(s) : ", k_1 + 1);
 }
 
 /* show a player's hand card */
 void ShowHandCard(Player *player1,int k_1,FILE *fp){
     int t=0;
+    printf("\nPlayer %d's card(s) : \n", k_1 + 1);
+    fprintf(fp,"\nPlayer %d's card(s) : ", k_1 + 1);
     while ((Loop(k_1,player1))->card[t]!=-1){
-        Card2Str((Loop(k_1,player1))->card[t]);
         WCard2Str((Loop(k_1,player1))->card[t],fp);
         printf("  ");
         fprintf(fp,"  ");

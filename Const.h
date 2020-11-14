@@ -19,5 +19,5 @@ typedef struct _Player{
 
 Player *Initialize(int n);
 Player *Loop(int k,Player *player1);
-
+void DeletePlayer(Player *player1,int n);
 #endif //MAIN_C_CONST_H

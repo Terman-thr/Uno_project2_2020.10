@@ -26,6 +26,7 @@ int main(int argc,char*argv[]) {
     static struct option long_options[] =
             {
                     {"help", no_argument, NULL, 'h'},
+                    {"auto", no_argument, NULL, 'a'},
                     {"log", required_argument, NULL, 'l'},
                     {"player-number",  required_argument,NULL, 'n'},
                     {"initial-cards",  required_argument,NULL, 'c'},

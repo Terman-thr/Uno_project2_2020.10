@@ -34,3 +34,10 @@ Player *Initialize(int n) {
     player->prev=head;
     return player;
 }
+
+void DeletePlayer(Player *player1,int n){
+    for (int i=0;i<n;i++){
+        player1=player1->next;
+        free(player1->prev);
+    }
+}

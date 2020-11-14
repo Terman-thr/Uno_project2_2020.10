@@ -20,7 +20,7 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
     }/* the card is now the pointer of the first 0 0-51->0-51*/
 
     //Shuffle the cards
-    ShuffleCard(52 * d, card,rand());
+    ShuffleCard(52 * d, card);
     printf("\n\nShuffling cards,please wait...\n\n\n");
     fprintf(fp,"\n\nShuffling cards,please wait...\n\n\n");
 
@@ -130,9 +130,9 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
         while (r > 0) {
             printf("\n\n==========================Round %d============================\n\n", r_1);
             fprintf(fp,"\n\n==========================Round %d============================\n\n", r_1);
-            printf("First card : ");
+            printf("First card : \n");
             fprintf(fp,"First card : ");
-            Card2Str(Card_valid_Rec);
+            SingleCard2Image(Card_valid_Rec);
             printf("\n\n Game starts with Player %d\n", k_1 + 1);
             fprintf(fp,"\n\n Game starts with Player %d\n", k_1 + 1);
             printf("Dealing cards...\n");
@@ -153,19 +153,19 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                         if (SerialNum == MAX_CARD)/* the player have to draw a card */{
                             ShuffleDiscardPile(DiscardPile, card, d,fp);
                             Dealer(card, Loop(k,player1));
-                            printf("\n\nPlayer %d draws: ", k_1 + 1); //demo mode
+                            printf("\n\nPlayer %d draws: \n", k_1 + 1); //demo mode
                             fprintf(fp,"\n\nPlayer %d draws: ", k_1 + 1);
 
                             while ((Loop(k_1,player1))->card[t] != -1) { t++; }
-                            Card2Str((Loop(k_1,player1))->card[t - 1]);
+                            SingleCard2Image((Loop(k_1,player1))->card[t - 1]);
                             WCard2Str((Loop(k_1,player1))->card[t - 1],fp);
                             t = 0;
 
-                            printf("\nPlayer %d's card(s): ", k_1 + 1);//show
+                            printf("\nPlayer %d's card(s): \n", k_1 + 1);//show
                             fprintf(fp,"\nPlayer %d's card(s): ", k_1 + 1);
                             bubble_sort((Loop(k,player1))->card,HandCardNum(Loop(k_1,player1)));
+                            Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                             while ((Loop(k_1,player1))->card[t] != -1) {
-                                Card2Str((Loop(k_1,player1))->card[t]);
                                 WCard2Str((Loop(k_1,player1))->card[t],fp);
                                 printf("  ");
                                 fprintf(fp,"  ");
@@ -176,9 +176,9 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                         }
                         if (TestCard(&Card_valid_Rec, &(Loop(k,player1))->card[SerialNum])) /* fit rank or suit */
                         {
-                            printf("\n\nPlayer %d plays: ", k_1 + 1); //demo mode
-                            fprintf(fp,"\n\nPlayer %d plays: ", k_1 + 1);
-                            Card2Str((Loop(k,player1))->card[SerialNum]);
+                            printf("\n\nPlayer %d plays: \n", k_1 + 1); //demo mode
+                            fprintf(fp,"\n\nPlayer %d plays: \n", k_1 + 1);
+                            SingleCard2Image((Loop(k,player1))->card[SerialNum]);
                             WCard2Str((Loop(k,player1))->card[SerialNum],fp);
 
                             switch ((Loop(k,player1))->card[SerialNum] % 13) /* test whether they are special cards */{
@@ -197,10 +197,10 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                             }
                             PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                             //show the cards
-                            printf("\nPlayer %d's card(s): ", k_1 + 1);//demo mode
-                            fprintf(fp,"\nPlayer %d's card(s): ", k_1 + 1);
+                            printf("\nPlayer %d's card(s): \n", k_1 + 1);//demo mode
+                            fprintf(fp,"\nPlayer %d's card(s):", k_1 + 1);
+                            Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                             while ((Loop(k_1,player1))->card[t] != -1)/* show */{
-                                Card2Str((Loop(k_1,player1))->card[t]);
                                 WCard2Str((Loop(k_1,player1))->card[t],fp);
                                 printf("  ");
                                 fprintf(fp,"  ");
@@ -225,10 +225,10 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                                 ShuffleDiscardPile(DiscardPile, card, d,fp);
                                 Dealer(card, Loop(k_1,player1));
                             }
-                            printf("\n\nPlayer %d draws :", k_1 + 1);
+                            printf("\n\nPlayer %d draws :\n", k_1 + 1);
                             fprintf(fp,"\n\nPlayer %d draws :", k_1 + 1);
+                            Card2Ima(attack,(Loop(k_1,player1))->card+Hand_poker_num);
                             for (t = 0; t < attack; t++) {
-                                Card2Str((Loop(k_1,player1))->card[Hand_poker_num + t]);
                                 WCard2Str((Loop(k_1,player1))->card[Hand_poker_num + t],fp);
                                 printf("   ");
                                 fprintf(fp,"   ");
@@ -236,11 +236,11 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                             t = 0;
 
                             attack = 0;
-                            printf("\nPlayer %d's card(s): ", k_1 + 1);//show
+                            printf("\nPlayer %d's card(s): \n", k_1 + 1);//show
                             fprintf(fp,"\nPlayer %d's card(s): ", k_1 + 1);
                             bubble_sort((Loop(k,player1))->card,HandCardNum(Loop(k_1,player1)));
+                            Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                             while ((Loop(k_1,player1))->card[t] != -1) {
-                                Card2Str((Loop(k_1,player1))->card[t]);
                                 WCard2Str((Loop(k_1,player1))->card[t],fp);
                                 printf("  ");
                                 fprintf(fp,"  ");
@@ -261,32 +261,42 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                                 case 5: //7
                                     attack = 0;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
+                                    SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
                                     PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
+                                    Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                                     break;
                                 case 0: //2
                                     attack += 2;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
+                                    SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
                                     PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
+                                    Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                                     break;
                                 case 1: //3
                                     attack += 3;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
+                                    SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
                                     PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
+                                    Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                                     break;
                                 case 9: //J
                                     k = direction ? (k + 1) : (k - 1);
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
+                                    SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
                                     PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
+                                    Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                                     break;
                                 case 10: //Q
                                     direction = !direction;
                                     ShowPlayedCard(player1, SerialNum, k_1,fp);
+                                    SingleCard2Image((Loop(k_1,player1))->card[SerialNum]);
                                     PlayACard(Loop(k_1,player1), SerialNum, &Card_Record, &Card_valid_Rec, DiscardPile);
                                     ShowHandCard(player1, k_1,fp);
+                                    Card2Ima(HandCardNum(Loop(k_1,player1)),(Loop(k_1,player1))->card);
                                     break;
                             }
                             break;
@@ -305,8 +315,8 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                 for (int j = 0; j <= 51; j++)
                     *(card + (i - 1) * 52 + j) = j;
             }/* the card is now the pointer of the first 0 0-51->0-51*/
-            ShuffleCard(52 * d, card, rand());
-
+            ShuffleCard(52 * d, card);
+            ShuffleCard(52 * d, card);
             for (int i = 0; i < d * 52; i++)/* clean discard pile */{
                 DiscardPile[i] = -1;
             }
@@ -533,7 +543,8 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
                 for (int j = 0; j <= 51; j++)
                     *(card + (i - 1) * 52 + j) = j;
             }/* the card is now the pointer of the first 0 0-51->0-51*/
-            ShuffleCard(52 * d, card, rand());
+            ShuffleCard(52 * d, card);
+            ShuffleCard(52 * d, card);
 
             for (int i = 0; i < d * 52; i++)/* clean discard pile */{
                 DiscardPile[i] = -1;
@@ -594,4 +605,5 @@ void Play(int n,int c,int d,int r,int a_bool,FILE *fp){
     getchar();
     free(card);
     free(DiscardPile);
+    DeletePlayer(player1,n);
 }

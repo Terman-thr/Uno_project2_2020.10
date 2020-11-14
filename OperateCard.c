@@ -6,12 +6,12 @@
 #include "UI.h"
 #include "test.h"
 // total card number ; the first card address
-void ShuffleCard(int CardNum,int *card, int a){
+void ShuffleCard(int CardNum,int *card){
     int tmp;
     srand((unsigned int )time(NULL));
     int ran;
     for (int i=0;i<CardNum;i++){
-        ran=(rand()*a)%(CardNum);
+        ran=(rand())%(CardNum);
         tmp=*(card+i);
         *(card+i)=*(card+(ran));
         *(card+(ran))=tmp;
@@ -24,7 +24,7 @@ void ShuffleDiscardPile(int *discardpile, int *card, int d,FILE *fp){
     if (TestCardEmpty(card,d)){
         printf("\n\n We need to shuffle the discarded poker pile ...");
         fprintf(fp,"\n\n We need to shuffle the discarded poker pile ...");
-        ShuffleCard(num, discardpile,rand());
+        ShuffleCard(num, discardpile);
         printf("\nShuffling cards ...\n");
         fprintf(fp,"\nShuffling cards ...\n");
         for (int i=0;i<num;i++)/* reuse the card */{
